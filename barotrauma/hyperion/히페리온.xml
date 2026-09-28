@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Submarine description="임시 골격. 외벽/내벽/헐만 배치됨." checkval="1779487722" price="30000" tier="3" initialsuppliesspawned="false" noitems="false" lowfuel="false" type="Player" ismanuallyoutfitted="false" class="Undefined" tags="0" outposttags="" triggeroutpostmissionevents="" gameversion="1.13.4.0" dimensions="7000,2256" cargocapacity="0" recommendedcrewsizemin="4" recommendedcrewsizemax="8" recommendedcrewexperience="CrewExperienceMid" requiredcontentpackages="Vanilla" name="히페리온">
+  <Structure name="외벽 A 90도" identifier="shella90deg" ID="1" rect="-3500,1128,96,2256" SpriteColor="90,80,75,255" Scale="1" Rotation="0" SpriteDepth="0.101" />
+  <Structure name="외벽 A 0도" identifier="shella0deg" ID="2" rect="-3500,1128,1920,96" SpriteColor="90,80,75,255" Scale="1" Rotation="0" SpriteDepth="0.101" />
+  <Structure name="외벽 A 90도" identifier="shella90deg" ID="3" rect="-1676,1128,96,448" SpriteColor="90,80,75,255" Scale="1" Rotation="0" SpriteDepth="0.101" />
+  <Structure name="외벽 A 0도" identifier="shella0deg" ID="4" rect="-1676,776,4480,96" SpriteColor="90,80,75,255" Scale="1" Rotation="0" SpriteDepth="0.101" />
+  <Structure name="외벽 A 90도" identifier="shella90deg" ID="5" rect="2708,776,96,448" SpriteColor="90,80,75,255" Scale="1" Rotation="0" SpriteDepth="0.101" />
+  <Structure name="외벽 A 90도" identifier="shella90deg" ID="6" rect="2708,-328,96,800" SpriteColor="90,80,75,255" Scale="1" Rotation="0" SpriteDepth="0.101" />
+  <Structure name="외벽 A 0도" identifier="shella0deg" ID="7" rect="2708,424,792,96" SpriteColor="90,80,75,255" Scale="1" Rotation="0" SpriteDepth="0.101" />
+  <Structure name="외벽 A 0도" identifier="shella0deg" ID="8" rect="2708,-328,792,96" SpriteColor="90,80,75,255" Scale="1" Rotation="0" SpriteDepth="0.101" />
+  <Structure name="외벽 A 90도" identifier="shella90deg" ID="9" rect="3404,424,96,848" SpriteColor="90,80,75,255" Scale="1" Rotation="0" SpriteDepth="0.101" />
+  <Structure name="외벽 A 0도" identifier="shella0deg" ID="10" rect="-3500,-1032,2688,96" SpriteColor="90,80,75,255" Scale="1" Rotation="0" SpriteDepth="0.101" />
+  <Structure name="외벽 A 0도" identifier="shella0deg" ID="11" rect="324,-1032,2480,96" SpriteColor="90,80,75,255" Scale="1" Rotation="0" SpriteDepth="0.101" />
+  <Structure name="외벽 A 90도" identifier="shella90deg" ID="12" rect="-908,-680,96,448" SpriteColor="90,80,75,255" Scale="1" Rotation="0" SpriteDepth="0.101" />
+  <Structure name="외벽 A 90도" identifier="shella90deg" ID="13" rect="324,-680,96,448" SpriteColor="90,80,75,255" Scale="1" Rotation="0" SpriteDepth="0.101" />
+  <Structure name="외벽 A 0도" identifier="shella0deg" ID="14" rect="-908,-680,1328,96" SpriteColor="90,80,75,255" Scale="1" Rotation="0" SpriteDepth="0.101" />
+  <Structure name="대형 내벽 수평" identifier="ff_x_wall" ID="15" rect="-3404,728,1728,48" SpriteColor="220,180,165,255" Scale="0.5" Rotation="0" SpriteDepth="0.101" />
+  <Structure name="대형 내벽 수평" identifier="ff_x_wall" ID="16" rect="-3404,376,6112,48" SpriteColor="220,180,165,255" Scale="0.5" Rotation="0" SpriteDepth="0.101" />
+  <Structure name="대형 내벽 수평" identifier="ff_x_wall" ID="17" rect="-3404,24,6808,48" SpriteColor="220,180,165,255" Scale="0.5" Rotation="0" SpriteDepth="0.101" />
+  <Structure name="대형 내벽 수평" identifier="ff_x_wall" ID="18" rect="-3404,-328,6112,48" SpriteColor="220,180,165,255" Scale="0.5" Rotation="0" SpriteDepth="0.101" />
+  <Structure name="대형 내벽 수평" identifier="ff_x_wall" ID="19" rect="-3404,-680,1104,48" SpriteColor="220,180,165,255" Scale="0.5" Rotation="0" SpriteDepth="0.101" />
+  <Structure name="대형 내벽 수평" identifier="ff_x_wall" ID="20" rect="1348,-680,1360,48" SpriteColor="220,180,165,255" Scale="0.5" Rotation="0" SpriteDepth="0.101" />
+  <Structure name="대형 내벽 수직" identifier="ff_y_wall" ID="21" rect="-2300,-376,48,656" SpriteColor="220,180,165,255" Scale="0.5" Rotation="0" SpriteDepth="0.102" />
+  <Structure name="대형 내벽 수직" identifier="ff_y_wall" ID="22" rect="-1836,-376,48,656" SpriteColor="220,180,165,255" Scale="0.5" Rotation="0" SpriteDepth="0.102" />
+  <Structure name="대형 내벽 수직" identifier="ff_y_wall" ID="23" rect="-1372,-376,48,656" SpriteColor="220,180,165,255" Scale="0.5" Rotation="0" SpriteDepth="0.102" />
+  <Structure name="대형 내벽 수직" identifier="ff_y_wall" ID="24" rect="-908,-376,48,304" SpriteColor="220,180,165,255" Scale="0.5" Rotation="0" SpriteDepth="0.102" />
+  <Structure name="대형 내벽 수직" identifier="ff_y_wall" ID="25" rect="372,-376,48,304" SpriteColor="220,180,165,255" Scale="0.5" Rotation="0" SpriteDepth="0.102" />
+  <Structure name="대형 내벽 수직" identifier="ff_y_wall" ID="26" rect="836,-376,48,656" SpriteColor="220,180,165,255" Scale="0.5" Rotation="0" SpriteDepth="0.102" />
+  <Structure name="대형 내벽 수직" identifier="ff_y_wall" ID="27" rect="1300,-376,48,656" SpriteColor="220,180,165,255" Scale="0.5" Rotation="0" SpriteDepth="0.102" />
+  <Hull ID="28" rect="-3404,1032,1728,304" water="0" backgroundsections="" RoomName="" AmbientLight="50,100,200,20" Oxygen="525312" IsWetRoom="False" AvoidStaying="False" DisallowedUpgrades="" SpriteDepth="0.001" Scale="1" HiddenInGame="False" />
+  <Hull ID="29" rect="-3404,680,6112,304" water="0" backgroundsections="" RoomName="" AmbientLight="50,100,200,20" Oxygen="1858048" IsWetRoom="False" AvoidStaying="False" DisallowedUpgrades="" SpriteDepth="0.001" Scale="1" HiddenInGame="False" />
+  <Hull ID="30" rect="-3404,328,6808,304" water="0" backgroundsections="" RoomName="" AmbientLight="50,100,200,20" Oxygen="2069632" IsWetRoom="False" AvoidStaying="False" DisallowedUpgrades="" SpriteDepth="0.001" Scale="1" HiddenInGame="False" />
+  <Hull ID="31" rect="-3404,-24,6808,304" water="0" backgroundsections="" RoomName="" AmbientLight="50,100,200,20" Oxygen="2069632" IsWetRoom="False" AvoidStaying="False" DisallowedUpgrades="" SpriteDepth="0.001" Scale="1" HiddenInGame="False" />
+  <Hull ID="32" rect="-3404,-728,1104,304" water="0" backgroundsections="" RoomName="" AmbientLight="50,100,200,20" Oxygen="335616" IsWetRoom="False" AvoidStaying="False" DisallowedUpgrades="" SpriteDepth="0.001" Scale="1" HiddenInGame="False" />
+  <Hull ID="33" rect="-3404,-376,1104,304" water="0" backgroundsections="" RoomName="" AmbientLight="50,100,200,20" Oxygen="335616" IsWetRoom="False" AvoidStaying="False" DisallowedUpgrades="" SpriteDepth="0.001" Scale="1" HiddenInGame="False" />
+  <Hull ID="34" rect="-2252,-376,416,656" water="0" backgroundsections="" RoomName="roomname.ballast" AmbientLight="50,100,200,20" Oxygen="272896" IsWetRoom="True" AvoidStaying="True" DisallowedUpgrades="" SpriteDepth="0.001" Scale="1" HiddenInGame="False" />
+  <Hull ID="35" rect="-1788,-376,416,656" water="0" backgroundsections="" RoomName="roomname.ballast" AmbientLight="50,100,200,20" Oxygen="272896" IsWetRoom="True" AvoidStaying="True" DisallowedUpgrades="" SpriteDepth="0.001" Scale="1" HiddenInGame="False" />
+  <Hull ID="36" rect="-1324,-376,416,656" water="0" backgroundsections="" RoomName="roomname.ballast" AmbientLight="50,100,200,20" Oxygen="272896" IsWetRoom="True" AvoidStaying="True" DisallowedUpgrades="" SpriteDepth="0.001" Scale="1" HiddenInGame="False" />
+  <Hull ID="37" rect="-860,-376,1232,304" water="0" backgroundsections="" RoomName="" AmbientLight="50,100,200,20" Oxygen="374528" IsWetRoom="False" AvoidStaying="False" DisallowedUpgrades="" SpriteDepth="0.001" Scale="1" HiddenInGame="False" />
+  <Hull ID="38" rect="420,-376,416,656" water="0" backgroundsections="" RoomName="roomname.ballast" AmbientLight="50,100,200,20" Oxygen="272896" IsWetRoom="True" AvoidStaying="True" DisallowedUpgrades="" SpriteDepth="0.001" Scale="1" HiddenInGame="False" />
+  <Hull ID="39" rect="884,-376,416,656" water="0" backgroundsections="" RoomName="roomname.ballast" AmbientLight="50,100,200,20" Oxygen="272896" IsWetRoom="True" AvoidStaying="True" DisallowedUpgrades="" SpriteDepth="0.001" Scale="1" HiddenInGame="False" />
+  <Hull ID="40" rect="1348,-728,1360,304" water="0" backgroundsections="" RoomName="" AmbientLight="50,100,200,20" Oxygen="413440" IsWetRoom="False" AvoidStaying="False" DisallowedUpgrades="" SpriteDepth="0.001" Scale="1" HiddenInGame="False" />
+  <Hull ID="41" rect="1348,-376,1360,304" water="0" backgroundsections="" RoomName="" AmbientLight="50,100,200,20" Oxygen="413440" IsWetRoom="False" AvoidStaying="False" DisallowedUpgrades="" SpriteDepth="0.001" Scale="1" HiddenInGame="False" />
+</Submarine>
