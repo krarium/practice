@@ -1,0 +1,11 @@
+잠수함 밖 웨이포인트 전부, 떠 있던 갭 2개, 중복 버튼문 1개(21133) 제거, 기존 헐 제거
+BT1: 내부 -4200~-3132, 칸막이 x=[-3876, -3504], 탱크 폭 약 324px
+BT2: 내부 -1310~-204, 칸막이 x=[-973, -589], 탱크 폭 약 337px
+사다리 추가: 벨러스트1 좌측 상단, 벨러스트2 우측 상단, 좌하단 도킹 해치
+외벽 개방: 좌상/우상/좌하/우하 도킹 해치, 우측 도킹 포트
+헐 60개, 전체 부피 10552520, 밸러스트 1477280 (14.00%)
+BT1 738720, BT2 738560, 최적 밸러스트 수준 0.5000
+내벽 마감: caph1 40개, caph2 7개, caph3 2개, capy2 7개
+배경 스타일 적용: airlock 4, armory 1, brig 4, brig_lobby 1, captain 1, cargo 3, corridor 10, docking 4, electrical 1, fabrication 2, galley 1, greenhouse 1, gunnery 2, lounge 1, medbay 1, mess 1, prep 5, reactor 1, research 1, shaft 9
+사다리 뒤 배경 12개
+saved /home/user/practice/barotrauma/hyperion/히페리온 - 베이스2.sub
