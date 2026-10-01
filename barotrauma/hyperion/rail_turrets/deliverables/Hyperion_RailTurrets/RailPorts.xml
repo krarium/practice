@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Items>
+  <Item identifier="hyperion_rail_anchor" variantof="dockingport" name="Hyperion rail anchor" tags="dock,hyperion_rail">
+    <ClearAll>
+      <LightComponent />
+    </ClearAll>
+    <DockingPort forcedockingdirection="Left" applyeffectsondocking="false" ishorizontal="true" distancetolerance="256,256" dockeddistance="0" />
+  </Item>
+  <Item identifier="hyperion_rail_carriage" variantof="dockingport" name="Hyperion rail carriage" tags="dock,hyperion_rail">
+    <ClearAll>
+      <LightComponent />
+    </ClearAll>
+    <DockingPort forcedockingdirection="Right" applyeffectsondocking="false" ishorizontal="true" distancetolerance="256,256" dockeddistance="0" />
+  </Item>
+</Items>

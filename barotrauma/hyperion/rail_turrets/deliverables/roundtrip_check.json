@@ -1,0 +1,15 @@
+{
+  "old_editor_save_duplicate_ids": [],
+  "new_editor_save_duplicate_ids": [],
+  "editor_save_cycles": 3,
+  "parent_loader_links": 4,
+  "game_id_offsets": [
+    1,
+    301,
+    7000
+  ],
+  "editor_light_components": 188,
+  "hidden_rail_ports": 238,
+  "room_lighting": "ceiling tubes range 420 / alpha 115 / shadows",
+  "limitations": "Source-based editor serialization and prefab checks; game executable and physics not run."
+}

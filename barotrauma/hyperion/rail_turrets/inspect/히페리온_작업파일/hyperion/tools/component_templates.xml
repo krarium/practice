@@ -1,0 +1,129 @@
+<Templates>
+  <Item name="" identifier="relaycomponent" ID="211" markedfordeconstruction="false" rect="971,-9,16,16" NonInteractable="False" NonPlayerTeamInteractable="False" AllowSwapping="True" Rotation="0" ImpactTolerance="0" ImpactDamage="0" ImpactDamageProbability="1" Scale="0.5" SpriteColor="255,255,255,255" InventoryIconColor="255,255,255,255" ContainerColor="255,255,255,255" HasBeenInstantiatedOnce="True" InvulnerableToDamage="False" Tags="logic,smallitem,circuitboxcomponent,signal" DisplaySideBySideWhenLinked="False" DisallowedUpgrades="" SpriteDepth="0.8" HiddenInGame="False" conditionpercentage="100">
+    <RelayComponent MaxPower="1000" IsOn="True" CanBeOverloaded="False" OverloadVoltage="2" FireProbability="0.15" IsActive="True" MinVoltage="0" PowerConsumption="0" Voltage="1" VulnerableToEMP="False" PickingTime="0" CanBePicked="False" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="" />
+    <Holdable Attached="True" DisallowAttachingOverTags="" DisallowAttachingOverSize="0,0" HoldPos="0,0" AimPos="65,-9.999999" HoldAngle="0" AimAngle="0" SwingAmount="0,0" SwingSpeed="0" SwingWhenHolding="False" SwingWhenAiming="False" SwingWhenUsing="False" DisableHeadRotation="False" SpriteDepthWhenDropped="0.55" MsgWhenDropped="ItemMsgPickupSelect" PickingTime="5" CanBePicked="True" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="ItemMsgDetachWrench">
+      <requireditem items="deattachtool,wrench" type="Equipped" characterinventoryslottype="None" optional="false" ignoreineditor="false" excludebroken="true" requireempty="false" excludefullcondition="false" targetslot="-1" allowvariants="true" rotation="0" setactive="false" excludedidentifiers="multitool" />
+    </Holdable>
+    <ConnectionPanel Locked="False" PickingTime="0" CanBePicked="False" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="ItemMsgRewireScrewdriver">
+      <requireditem items="screwdriver" type="Equipped" characterinventoryslottype="None" optional="false" ignoreineditor="false" excludebroken="true" requireempty="false" excludefullcondition="false" targetslot="-1" allowvariants="true" rotation="0" setactive="false" />
+      <input name="power_in" />
+      <input name="signal_in1" />
+      <input name="signal_in2" />
+      <input name="toggle" />
+      <input name="set_state" />
+      <output name="power_out" />
+      <output name="signal_out1" />
+      <output name="signal_out2" />
+      <output name="state_out" />
+      <output name="load_value_out" />
+      <output name="power_value_out" />
+      <input name="signal_in3" />
+      <input name="signal_in4" />
+      <input name="signal_in5" />
+      <output name="signal_out3" />
+      <output name="signal_out4" />
+      <output name="signal_out5" />
+    </ConnectionPanel>
+  </Item>
+  <Item name="" identifier="notcomponent" ID="534" markedfordeconstruction="false" rect="-800,360,16,16" NonInteractable="False" NonPlayerTeamInteractable="False" AllowSwapping="True" Rotation="0" ImpactTolerance="0" ImpactDamage="0" ImpactDamageProbability="1" Scale="0.5" SpriteColor="255,255,255,255" InventoryIconColor="255,255,255,255" ContainerColor="255,255,255,255" HasBeenInstantiatedOnce="True" InvulnerableToDamage="False" Tags="logic,smallitem,circuitboxcomponent" DisplaySideBySideWhenLinked="False" DisallowedUpgrades="" SpriteDepth="0.8" HiddenInGame="False" conditionpercentage="100">
+    <NotComponent ContinuousOutput="False" PickingTime="0" CanBePicked="False" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="" />
+    <Holdable Attached="True" DisallowAttachingOverTags="" DisallowAttachingOverSize="0,0" HoldPos="0,0" AimPos="65,-9.999999" HoldAngle="0" AimAngle="0" SwingAmount="0,0" SwingSpeed="0" SwingWhenHolding="False" SwingWhenAiming="False" SwingWhenUsing="False" DisableHeadRotation="False" SpriteDepthWhenDropped="0.55" MsgWhenDropped="ItemMsgPickupSelect" PickingTime="5" CanBePicked="True" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="ItemMsgDetachWrench">
+      <requireditem items="deattachtool,wrench" type="Equipped" characterinventoryslottype="None" optional="false" ignoreineditor="false" excludebroken="true" requireempty="false" excludefullcondition="false" targetslot="-1" allowvariants="true" rotation="0" setactive="false" excludedidentifiers="multitool" />
+    </Holdable>
+    <ConnectionPanel Locked="False" PickingTime="0" CanBePicked="False" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="ItemMsgRewireScrewdriver">
+      <requireditem items="screwdriver" type="Equipped" characterinventoryslottype="None" optional="false" ignoreineditor="false" excludebroken="true" requireempty="false" excludefullcondition="false" targetslot="-1" allowvariants="true" rotation="0" setactive="false" />
+      <input name="signal_in" />
+      <output name="signal_out" />
+    </ConnectionPanel>
+  </Item>
+  <Item name="" identifier="andcomponent" ID="331" markedfordeconstruction="false" rect="-16,-120,16,16" NonInteractable="False" NonPlayerTeamInteractable="False" AllowSwapping="True" Rotation="0" ImpactTolerance="0" ImpactDamage="0" ImpactDamageProbability="1" Scale="0.5" SpriteColor="255,255,255,255" InventoryIconColor="255,255,255,255" ContainerColor="255,255,255,255" HasBeenInstantiatedOnce="True" InvulnerableToDamage="False" Tags="logic,smallitem,circuitboxcomponent" DisplaySideBySideWhenLinked="False" DisallowedUpgrades="" SpriteDepth="0.8" HiddenInGame="False" conditionpercentage="100">
+    <AndComponent TimeFrame="0" MaxOutputLength="200" Output="1" FalseOutput="0" PickingTime="0" CanBePicked="False" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="" />
+    <Holdable Attached="True" DisallowAttachingOverTags="" DisallowAttachingOverSize="0,0" HoldPos="0,0" AimPos="85,-9.999999" HoldAngle="0" AimAngle="0" SwingAmount="0,0" SwingSpeed="0" SwingWhenHolding="False" SwingWhenAiming="False" SwingWhenUsing="False" DisableHeadRotation="False" SpriteDepthWhenDropped="0.55" MsgWhenDropped="ItemMsgPickupSelect" PickingTime="5" CanBePicked="True" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="ItemMsgDetachWrench">
+      <requireditem items="deattachtool,wrench" type="Equipped" characterinventoryslottype="None" optional="false" ignoreineditor="false" excludebroken="true" requireempty="false" excludefullcondition="false" targetslot="-1" allowvariants="true" rotation="0" setactive="false" excludedidentifiers="multitool" />
+    </Holdable>
+    <ConnectionPanel Locked="False" PickingTime="0" CanBePicked="False" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="ItemMsgRewireScrewdriver">
+      <requireditem items="screwdriver" type="Equipped" characterinventoryslottype="None" optional="false" ignoreineditor="false" excludebroken="true" requireempty="false" excludefullcondition="false" targetslot="-1" allowvariants="true" rotation="0" setactive="false" />
+      <input name="signal_in1" />
+      <input name="signal_in2" />
+      <input name="set_output" />
+      <output name="signal_out" />
+    </ConnectionPanel>
+  </Item>
+  <Item name="" identifier="orcomponent" ID="254" markedfordeconstruction="false" rect="608,135,16,16" NonInteractable="False" NonPlayerTeamInteractable="False" AllowSwapping="True" Rotation="0" ImpactTolerance="0" ImpactDamage="0" ImpactDamageProbability="1" Scale="0.5" SpriteColor="255,255,255,255" InventoryIconColor="255,255,255,255" ContainerColor="255,255,255,255" HasBeenInstantiatedOnce="True" InvulnerableToDamage="False" Tags="logic,smallitem,circuitboxcomponent" DisplaySideBySideWhenLinked="False" DisallowedUpgrades="" SpriteDepth="0.801" HiddenInGame="False" conditionpercentage="100">
+    <OrComponent TimeFrame="4" MaxOutputLength="200" Output="" FalseOutput="0" PickingTime="0" CanBePicked="False" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="" />
+    <Holdable Attached="True" DisallowAttachingOverTags="" DisallowAttachingOverSize="0,0" HoldPos="0,0" AimPos="65,-9.999999" HoldAngle="0" AimAngle="0" SwingAmount="0,0" SwingSpeed="0" SwingWhenHolding="False" SwingWhenAiming="False" SwingWhenUsing="False" DisableHeadRotation="False" SpriteDepthWhenDropped="0.55" MsgWhenDropped="ItemMsgPickupSelect" PickingTime="5" CanBePicked="True" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="ItemMsgDetachWrench">
+      <requireditem items="wrench" type="Equipped" characterinventoryslottype="None" optional="false" ignoreineditor="false" excludebroken="true" requireempty="false" excludefullcondition="false" targetslot="-1" allowvariants="true" rotation="0" setactive="false" excludedidentifiers="multitool" />
+    </Holdable>
+    <ConnectionPanel Locked="False" PickingTime="0" CanBePicked="False" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="ItemMsgRewireScrewdriver">
+      <requireditem items="screwdriver" type="Equipped" characterinventoryslottype="None" optional="false" ignoreineditor="false" excludebroken="true" requireempty="false" excludefullcondition="false" targetslot="-1" allowvariants="true" rotation="0" setactive="false" />
+      <input name="signal_in1" />
+      <input name="signal_in2" />
+      <input name="set_output" />
+      <output name="signal_out" />
+    </ConnectionPanel>
+  </Item>
+  <Item name="" identifier="signalcheckcomponent" ID="629" markedfordeconstruction="false" rect="478,337,16,16" NonInteractable="False" NonPlayerTeamInteractable="False" AllowSwapping="True" Rotation="0" ImpactTolerance="0" ImpactDamage="0" ImpactDamageProbability="1" Scale="0.5" SpriteColor="255,255,255,255" InventoryIconColor="255,255,255,255" ContainerColor="255,255,255,255" OnInsertedEffectsApplied="True" HasBeenInstantiatedOnce="True" InvulnerableToDamage="False" Tags="logic,smallitem,circuitboxcomponent" DisplaySideBySideWhenLinked="False" DisallowedUpgrades="" SpriteDepth="0.8" HiddenInGame="False" conditionpercentage="100">
+    <SignalCheckComponent MaxOutputLength="200" Output="1" FalseOutput="0" TargetSignal="0" PickingTime="0" CanBePicked="False" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="" />
+    <Holdable DisallowAttachingOverTags="" DisallowAttachingOverSize="0,0" HoldPos="0,0" AimPos="65,-9.999999" HoldAngle="0" AimAngle="0" SwingAmount="0,0" SwingSpeed="0" SwingWhenHolding="False" SwingWhenAiming="False" SwingWhenUsing="False" DisableHeadRotation="False" SpriteDepthWhenDropped="0.55" MsgWhenDropped="ItemMsgPickupSelect" PickingTime="5" CanBePicked="True" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="ItemMsgDetachWrench">
+      <requireditem items="deattachtool,wrench" type="Equipped" characterinventoryslottype="None" optional="false" ignoreineditor="false" excludebroken="true" requireempty="false" excludefullcondition="false" targetslot="-1" allowvariants="true" rotation="0" setactive="false" excludedidentifiers="multitool" />
+    </Holdable>
+    <ConnectionPanel Locked="False" PickingTime="0" CanBePicked="False" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="ItemMsgRewireScrewdriver">
+      <requireditem items="screwdriver" type="Equipped" characterinventoryslottype="None" optional="false" ignoreineditor="false" excludebroken="true" requireempty="false" excludefullcondition="false" targetslot="-1" allowvariants="true" rotation="0" setactive="false" />
+      <input name="signal_in" />
+      <input name="set_output" />
+      <input name="set_targetsignal" />
+      <output name="signal_out" />
+    </ConnectionPanel>
+  </Item>
+  <Item name="" identifier="memorycomponent" ID="852" markedfordeconstruction="false" rect="478,337,16,16" NonInteractable="False" NonPlayerTeamInteractable="False" AllowSwapping="True" Rotation="0" ImpactTolerance="0" ImpactDamage="0" ImpactDamageProbability="1" Scale="0.5" SpriteColor="255,255,255,255" InventoryIconColor="255,255,255,255" ContainerColor="255,255,255,255" OnInsertedEffectsApplied="True" HasBeenInstantiatedOnce="True" InvulnerableToDamage="False" Tags="logic,smallitem,circuitboxcomponent" DisplaySideBySideWhenLinked="False" DisallowedUpgrades="" SpriteDepth="0.8" HiddenInGame="False" conditionpercentage="100">
+    <MemoryComponent MaxValueLength="200" Value="5" Writeable="True" PickingTime="0" CanBePicked="False" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="" />
+    <Holdable DisallowAttachingOverTags="" DisallowAttachingOverSize="0,0" HoldPos="0,0" AimPos="65,-9.999999" HoldAngle="0" AimAngle="0" SwingAmount="0,0" SwingSpeed="0" SwingWhenHolding="False" SwingWhenAiming="False" SwingWhenUsing="False" DisableHeadRotation="False" SpriteDepthWhenDropped="0.55" MsgWhenDropped="ItemMsgPickupSelect" PickingTime="5" CanBePicked="True" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="ItemMsgDetachWrench">
+      <requireditem items="deattachtool,wrench" type="Equipped" characterinventoryslottype="None" optional="false" ignoreineditor="false" excludebroken="true" requireempty="false" excludefullcondition="false" targetslot="-1" allowvariants="true" rotation="0" setactive="false" excludedidentifiers="multitool" />
+    </Holdable>
+    <ConnectionPanel Locked="False" PickingTime="0" CanBePicked="False" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="ItemMsgRewireScrewdriver">
+      <requireditem items="screwdriver" type="Equipped" characterinventoryslottype="None" optional="false" ignoreineditor="false" excludebroken="true" requireempty="false" excludefullcondition="false" targetslot="-1" allowvariants="true" rotation="0" setactive="false" />
+      <input name="signal_in" />
+      <input name="lock_state" />
+      <output name="signal_out" />
+    </ConnectionPanel>
+  </Item>
+  <Item name="" identifier="delaycomponent" ID="974" markedfordeconstruction="false" rect="478,337,16,16" NonInteractable="False" NonPlayerTeamInteractable="False" AllowSwapping="True" Rotation="0" ImpactTolerance="0" ImpactDamage="0" ImpactDamageProbability="1" Scale="0.5" SpriteColor="255,255,255,255" InventoryIconColor="255,255,255,255" ContainerColor="255,255,255,255" OnInsertedEffectsApplied="True" HasBeenInstantiatedOnce="True" InvulnerableToDamage="False" Tags="logic,smallitem,circuitboxcomponent" DisplaySideBySideWhenLinked="False" DisallowedUpgrades="" SpriteDepth="0.8" HiddenInGame="False" conditionpercentage="100">
+    <DelayComponent Delay="0.2" ResetWhenSignalReceived="True" ResetWhenDifferentSignalReceived="False" PickingTime="0" CanBePicked="False" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="" />
+    <Holdable DisallowAttachingOverTags="" DisallowAttachingOverSize="0,0" HoldPos="0,0" AimPos="65,-9.999999" HoldAngle="0" AimAngle="0" SwingAmount="0,0" SwingSpeed="0" SwingWhenHolding="False" SwingWhenAiming="False" SwingWhenUsing="False" DisableHeadRotation="False" SpriteDepthWhenDropped="0.55" MsgWhenDropped="ItemMsgPickupSelect" PickingTime="5" CanBePicked="True" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="ItemMsgDetachWrench">
+      <requireditem items="deattachtool,wrench" type="Equipped" characterinventoryslottype="None" optional="false" ignoreineditor="false" excludebroken="true" requireempty="false" excludefullcondition="false" targetslot="-1" allowvariants="true" rotation="0" setactive="false" excludedidentifiers="multitool" />
+    </Holdable>
+    <ConnectionPanel Locked="False" PickingTime="0" CanBePicked="False" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="ItemMsgRewireScrewdriver">
+      <requireditem items="screwdriver" type="Equipped" characterinventoryslottype="None" optional="false" ignoreineditor="false" excludebroken="true" requireempty="false" excludefullcondition="false" targetslot="-1" allowvariants="true" rotation="0" setactive="false" />
+      <input name="signal_in" />
+      <output name="signal_out" />
+      <input name="set_delay" />
+    </ConnectionPanel>
+  </Item>
+  <Item name="" identifier="extinguisherbracket" ID="526" markedfordeconstruction="false" rect="613,40,36,102" NonInteractable="False" NonPlayerTeamInteractable="False" AllowSwapping="True" Rotation="0" ImpactTolerance="0" ImpactDamage="0" ImpactDamageProbability="1" Scale="0.5" SpriteColor="220,220,220,255" InventoryIconColor="255,255,255,255" ContainerColor="255,255,255,255" HasBeenInstantiatedOnce="True" InvulnerableToDamage="False" Tags="extinguisherholder" DisplaySideBySideWhenLinked="False" DisallowedUpgrades="" SpriteDepth="0.839" HiddenInGame="False" conditionpercentage="100">
+    <ItemContainer ContainableRestrictions="" AutoFill="True" PickingTime="0" CanBePicked="False" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="ItemMsgInteractSelect" contained="" ExtraStackSize="0" />
+    <itemstats />
+  </Item>
+  <Item name="" identifier="smokedetector" ID="592" markedfordeconstruction="false" rect="336,105,24,16" NonInteractable="False" NonPlayerTeamInteractable="False" AllowSwapping="True" Rotation="0" ImpactTolerance="0" ImpactDamage="0" ImpactDamageProbability="1" Scale="0.5" SpriteColor="255,255,255,255" InventoryIconColor="255,255,255,255" ContainerColor="255,255,255,255" OffsetOnSelectedMultiplier="1" HasBeenInstantiatedOnce="True" InvulnerableToDamage="False" Tags="sensor,smallitem" DisplaySideBySideWhenLinked="False" DisallowedUpgrades="" SpriteDepth="0.8" HiddenInGame="False" conditionpercentage="100">
+    <SmokeDetector MaxOutputLength="200" Output="1" FalseOutput="" PickingTime="0" CanBePicked="False" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="" />
+    <Holdable Attached="True" DisallowAttachingOverTags="" DisallowAttachingOverSize="0,0" HoldPos="0,0" AimPos="65,-9.999999" HoldAngle="0" AimAngle="0" EquipRotationDegrees="90" EquipRotationDuration="0.15" SwingAmount="0,0" SwingSpeed="0" SwingWhenHolding="False" SwingWhenAiming="False" SwingWhenUsing="False" DisableHeadRotation="False" SpriteDepthWhenDropped="0.55" MsgWhenDropped="ItemMsgPickupSelect" CanBeUnheld="True" PickingTime="5" CanBePicked="True" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="ItemMsgDetachWrench">
+      <requireditem items="deattachtool,wrench" type="Equipped" characterinventoryslottype="None" optional="false" ignoreineditor="false" excludebroken="true" requireempty="false" excludefullcondition="false" targetslot="-1" allowvariants="true" rotation="0" setactive="false" excludedidentifiers="multitool" />
+    </Holdable>
+    <ConnectionPanel Locked="False" PickingTime="0" CanBePicked="False" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="ItemMsgRewireScrewdriver">
+      <requireditem items="screwdriver" type="Equipped" characterinventoryslottype="None" optional="false" ignoreineditor="false" excludebroken="true" requireempty="false" excludefullcondition="false" targetslot="-1" allowvariants="true" rotation="0" setactive="false" />
+      <output name="signal_out" />
+    </ConnectionPanel>
+  </Item>
+  <Item name="" identifier="xorcomponent" ID="54" markedfordeconstruction="false" rect="2016,-200,16,16" NonInteractable="False" NonPlayerTeamInteractable="False" AllowSwapping="True" Rotation="0" Scale="0.5" SpriteColor="255,255,255,255" InventoryIconColor="255,255,255,255" ContainerColor="255,255,255,255" InvulnerableToDamage="False" Tags="circuitboxcomponent,smallitem,logic" DisplaySideBySideWhenLinked="False" DisallowedUpgrades="" SpriteDepth="0.8" HiddenInGame="False" conditionpercentage="100">
+    <XorComponent TimeFrame="0" MaxOutputLength="200" Output="1" FalseOutput="0" PickingTime="0" CanBePicked="False" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="" />
+    <Holdable Attached="True" HoldAngle="0" AimAngle="0" SwingAmount="0,0" SwingSpeed="0" SwingWhenHolding="False" SwingWhenAiming="False" SwingWhenUsing="False" DisableHeadRotation="False" SpriteDepthWhenDropped="0.55" PickingTime="5" CanBePicked="True" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="ItemMsgDetachWrench">
+      <requireditem items="wrench" type="Equipped" characterinventoryslottype="None" optional="false" ignoreineditor="false" excludebroken="true" requireempty="false" excludefullcondition="false" targetslot="-1" allowvariants="true" rotation="0" setactive="false" />
+    </Holdable>
+    <ConnectionPanel Locked="False" PickingTime="0" CanBePicked="False" LockGuiFramePosition="False" GuiFrameOffset="0,0" AllowInGameEditing="True" Msg="ItemMsgRewireScrewdriver">
+      <requireditem items="screwdriver" type="Equipped" characterinventoryslottype="None" optional="false" ignoreineditor="false" excludebroken="true" requireempty="false" excludefullcondition="false" targetslot="-1" allowvariants="true" rotation="0" setactive="false" />
+      <input name="signal_in1" />
+      <input name="signal_in2" />
+      <input name="set_output" />
+      <output name="signal_out" />
+    </ConnectionPanel>
+  </Item>
+</Templates>

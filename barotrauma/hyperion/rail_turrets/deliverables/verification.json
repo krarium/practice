@@ -1,0 +1,18 @@
+{
+  "static_assertions": 19923,
+  "scenarios": [
+    {
+      "lock_model_seconds": 0.35,
+      "time_model_seconds": 170.2,
+      "transit_steps": 122,
+      "all_passed": true
+    },
+    {
+      "lock_model_seconds": 1.0,
+      "time_model_seconds": 388.37,
+      "transit_steps": 116,
+      "all_passed": true
+    }
+  ],
+  "limitation": "Saved circuit evaluated in a Python model based on native component sources. Barotrauma physics, camera selection, multiplayer and real ammo consumption are not executed."
+}

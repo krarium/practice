@@ -1,0 +1,33 @@
+OK   rail prefabs: DistanceTolerance 256,256 and DockedDistance 0
+OK   upper: one carriage hull
+OK   upper: carriage hull clear of the port band (no docking blockers)
+OK   upper: largest step 76px (capture tolerance 256)
+OK   upper: 120 anchors on their points
+OK   upper: carriage body touches nothing of Hyperion at all 120 positions
+OK   upper: hangar path centred in the 256px hatch opening
+OK   upper: aim wire order ['railgun', 'doublecoilgun'] -> periscope focuses the double coilgun
+OK   upper doublecoilgun: full 360 rotation
+OK   upper doublecoilgun: base rotation 0
+OK   upper railgun: full 360 rotation
+OK   upper railgun: base rotation 0
+OK   upper: rail x -4020..3660, junction [-652, 900], home [-652, 580]
+OK   lower: one carriage hull
+OK   lower: carriage hull clear of the port band (no docking blockers)
+OK   lower: largest step 76px (capture tolerance 256)
+OK   lower: 118 anchors on their points
+OK   lower: carriage body touches nothing of Hyperion at all 118 positions
+OK   lower: hangar path centred in the 256px hatch opening
+OK   lower: aim wire order ['railgun', 'doublecoilgun'] -> periscope focuses the double coilgun
+OK   lower doublecoilgun: full 360 rotation
+OK   lower doublecoilgun: base rotation 180
+OK   lower railgun: full 360 rotation
+OK   lower railgun: base rotation 180
+OK   lower: rail x -4020..3660, junction [548, -1120], home [548, -800]
+OK   hatch 2458: gap joins ('6160', '상부 이동포탑 해치 차수막') / ('1671', '상부 이동포탑 격납고') (no open side to the sea)
+OK   hatch 2460: gap joins ('6160', '상부 이동포탑 해치 차수막') / ('1671', '상부 이동포탑 격납고') (no open side to the sea)
+OK   hatch 2465: gap joins ('1164', '하부 이동포탑 격납고') / ('6161', '하부 이동포탑 해치 차수막') (no open side to the sea)
+OK   hatch 2467: gap joins ('1164', '하부 이동포탑 격납고') / ('6161', '하부 이동포탑 해치 차수막') (no open side to the sea)
+OK   64 ceiling tubes at range 420, alpha 115
+OK   shadow-casting lights 66 (editor limit 100)
+OK   lower hangar ladder at x 456..467
+
