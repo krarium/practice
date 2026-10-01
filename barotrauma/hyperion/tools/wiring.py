@@ -78,6 +78,34 @@ class Wiring:
         for e in self.sub.elements('Item'):
             if e.get('identifier') in ROUTE_ITEMS:
                 mark(get_rect(e), self.route)
+        self._keep_main_component()
+
+    def _keep_main_component(self):
+        """벽과 이어지지 않은 외딴 칸(외벽 밖 해치 등)은 배선 경로에서 뺀다."""
+        W, H, route = self.W, self.H, self.route
+        comp = [-1] * (W * H)
+        sizes = []
+        for s in range(W * H):
+            if not route[s] or comp[s] >= 0:
+                continue
+            k, st, n = len(sizes), [s], 0
+            comp[s] = k
+            while st:
+                x = st.pop()
+                n += 1
+                i, j = x % W, x // W
+                for ni, nj in ((i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1)):
+                    if 0 <= ni < W and 0 <= nj < H:
+                        y = nj * W + ni
+                        if route[y] and comp[y] < 0:
+                            comp[y] = k
+                            st.append(y)
+            sizes.append(n)
+        if len(sizes) > 1:
+            big = max(range(len(sizes)), key=sizes.__getitem__)
+            for s in range(W * H):
+                if comp[s] >= 0 and comp[s] != big:
+                    route[s] = 0
 
     def cell(self, x, y):
         return int((x - self.X0) // G), int((y - self.Y0) // G)
