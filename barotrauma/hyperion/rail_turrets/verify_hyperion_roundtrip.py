@@ -23,7 +23,7 @@ def editor_save_ids(root):
     return sorted(i for i,n in collections.Counter(saved).items() if n>1),remap
 
 def verify():
-    r=load_sub(P/'히페리온 - 베이스 7.2.sub')
+    r=load_sub(P/'히페리온 - 베이스 7.3.sub')
     fixture=Path('/tmp/hyperion7_crash_repro.sub')
     old_dupes=[]
     if fixture.exists():

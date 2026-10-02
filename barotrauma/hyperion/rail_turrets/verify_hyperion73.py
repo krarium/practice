@@ -7,7 +7,7 @@ BASE=Path(__file__).resolve().parent
 sys.path.insert(0,str(BASE/'inspect/히페리온_작업파일/hyperion/tools'))
 from subxml import load_sub,get_rect
 P=BASE/'deliverables/Hyperion_RailTurrets';M=json.loads((BASE/'deliverables/manifest.json').read_text())
-root=load_sub(P/'히페리온 - 베이스 7.2.sub')
+root=load_sub(P/'히페리온 - 베이스 7.3.sub')
 ALL=[root]+[e for e in root if e.tag=='LinkedSubmarine']
 checks=[]
 def check(cond,msg):
@@ -59,7 +59,7 @@ def static():
         check(all(points[i][0]<points[i+1][0] for i in range(N)),'A/D indexed rail is monotonically left/right')
         if rail['name']=='lower':check(len({p[1] for p in points[:N+1]})==1,'Lower exterior rail is straight')
         # Body footprint clears the exterior shell before the hatch closes.
-        # Turret art (238 px wide) passes the 256 px hatch opening; body clearance is checked in check72_geometry.py.
+        # Turret art (238 px wide) passes the 256 px hatch opening; body clearance is checked in check73_geometry.py.
         for i in range(N+1,HOME+1):check(-780+119<=points[i][0]<=-524-119 if rail['name']=='upper' else 420+119<=points[i][0]<=676-119,'Hangar transit turret fits the opening')
     old=load_sub(BASE/'inspect/히페리온_작업파일/hyperion/input/히페리온 - 베이스 6 (사용자 수정).sub')
     for id in ['3149','1124','1123','1126','2090','1325','1336']:

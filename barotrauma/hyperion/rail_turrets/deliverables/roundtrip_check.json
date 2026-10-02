@@ -9,7 +9,7 @@
     7000
   ],
   "editor_light_components": 188,
-  "hidden_rail_ports": 238,
+  "hidden_rail_ports": 229,
   "room_lighting": "ceiling tubes range 420 / alpha 115 / shadows",
   "limitations": "Source-based editor serialization and prefab checks; game executable and physics not run."
 }

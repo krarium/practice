@@ -1,5 +1,5 @@
 """7.2 geometry checks: rail capture, turret-body clearance, hatch seals, periscope focus, lights.
-Usage: python3 check72_geometry.py   (reads deliverables/)"""
+Usage: python3 check73_geometry.py   (reads deliverables/)"""
 from pathlib import Path
 import sys, json, math
 BASE = Path(__file__).resolve().parent
@@ -7,7 +7,7 @@ sys.path.insert(0, str(BASE / 'inspect/히페리온_작업파일/hyperion/tools'
 from subxml import load_sub, get_rect
 P = BASE / 'deliverables/Hyperion_RailTurrets'
 M = json.loads((BASE / 'deliverables/manifest.json').read_text())
-root = load_sub(P / '히페리온 - 베이스 7.2.sub')
+root = load_sub(P / '히페리온 - 베이스 7.3.sub')
 ids = {e.get('ID'): e for e in root if e.get('ID')}
 out, bad = [], []
 def ok(cond, msg):
@@ -98,6 +98,34 @@ ok(all(l.get('Range') == '420' and l.get('LightColor').endswith(',115') for l in
 shadow = sum(1 for i, l in lc if l.get('CastShadows') == 'True')
 ok(shadow <= 100, f'shadow-casting lights {shadow} (editor limit 100)')
 lad = [get_rect(e) for e in root if e.get('identifier') == 'ladder' and get_rect(e)[2] == -904 and get_rect(e)[3] == -200]
-ok(lad and lad[0][0] == 456, f'lower hangar ladder at x {lad[0][0]}..{lad[0][1]}')
+low = M['rails'][1]; lx = low['points'][low['home']][0]
+lchild = load_sub(P / low['child']); lart = [get_rect(e) for e in lchild if e.tag in ('Structure',) or e.get('identifier') in ('doublecoilgun', 'railgun')]
+span = (lx + min(r[0] for r in lart) - 18, lx + max(r[1] for r in lart) + 18)
+ok(lad and lad[0][0] > span[1], f'lower hangar ladder x {lad[0][0]}..{lad[0][1]} clear of the lower turret path + guide rails {span[0]:.0f}..{span[1]:.0f}')
+hatch = [get_rect(e) for e in root if e.get('identifier') == 'hatchwbuttons' and get_rect(e)[2] == -361 and get_rect(e)[0] <= lad[0][0] <= get_rect(e)[1]]
+ok(hatch and hatch[0][0] <= lad[0][0] and lad[0][1] <= hatch[0][1], f'ladder passes its ceiling hatch {hatch[0][:2]}')
+# visual rails
+vr = [ids[i] for i in M['visual_rails']]
+ok(vr and all(e.get('DisableCollision') == 'True' and e.get('Indestructible') == 'True' and e.get('NoAITarget') == 'True'
+              and float(e.get('SpriteDepth')) == 0.0015 for e in vr), f'{len(vr)} visual rail beams: no collision, indestructible, depth 0.0015')
+def rbox(e):
+    a, b, c, d = get_rect(e); t = math.radians(float(e.get('Rotation', '0') or 0))
+    cx, cy, w, h = (a + b) / 2, (c + d) / 2, (b - a) / 2, (d - c) / 2
+    ex, ey = abs(w * math.cos(t)) + abs(h * math.sin(t)), abs(w * math.sin(t)) + abs(h * math.cos(t))
+    return cx - ex, cx + ex, cy - ey, cy + ey
+hatch_ids = {h for r in M['rails'] for h in r['hatches']}
+front = [e for e in root if e.tag in ('Structure', 'Item') and e.get('rect') and e.get('HiddenInGame') != 'True'
+         and e.get('ID') not in M['visual_rails'] and e.get('ID') not in hatch_ids and float(e.get('SpriteDepth', '1')) <= 0.0015]
+cover = sorted({f"{e.get('identifier')}#{e.get('ID')}" for e in front for v in vr if overlap(get_rect(e), rbox(v))})
+ok(not cover, f'nothing visible is drawn in front of the rails except the hangar hatches' + (f' -> {cover}' if cover else ''))
+ok(all(ids[h].get('SpriteDepth') == '0.001' for r in M['rails'] for h in r['hatches']), 'hangar hatches depth 0.001 (in front of the rails)')
+for rail in M['rails']:
+    child = load_sub(P / rail['child']); cid = {e.get('ID'): e for e in child if e.get('ID')}
+    gun = cid[rail['child_guns'][0]]
+    ok(any(c.get('name') == 'set_light' and c.findall('link') for c in gun.find('ConnectionPanel')), f"{rail['name']}: turret light wired (set_light)")
+    ok(any(e.get('identifier') == 'lightleds01' for e in child), f"{rail['name']}: carriage LED present")
+    ok(not any(e.get('identifier') == 'ff_x_wall' for e in child), f"{rail['name']}: no hidden backplate wall")
+    flips = [e.get('identifier') for e in child if e.tag == 'Structure' and (e.get('flippedy') == 'true')]
+    out.append(f"{rail['name']}: {rail['rail_end'] + 1} rail anchors, branch {rail['home'] - rail['rail_end']}, flipped-y art pieces {len(flips)}")
 print('\n'.join('OK   ' + m for m in out)); print('\n'.join('FAIL ' + m for m in bad))
 sys.exit(1 if bad else 0)

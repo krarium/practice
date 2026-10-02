@@ -42,8 +42,16 @@ delete(1329);delete(1330)
 for i in range(1682,1692):
     t=sub.by_id(i);a,b,c,d=get_rect(t);q=clone(t,(a+b)/2,(c+d)/2+512)
 sub.by_id(1673).set('RoomName','상부 이동포탑 격납고')
-# Lower hangar ladder: 24 px to the right (still inside its ceiling hatch 368..496 and backdrop 406..470).
-lad=sub.by_id(972);a,b,c,d=get_rect(lad);set_rect(lad,a+24,b+24,c,d)
+# Lower hangar ladder (7.3): moved right, clear of the lower turret's path (turret 422..674,
+# guide rails to 686). Its ceiling hatch moves with it: hatch 368..496 -> 690..818 in the
+# ceiling wall; the old opening is closed by extending wall 2040. Ladder at x 712..723.
+HDX=690-368
+for i in [1060,1061,1062,1063,1211,1212]:
+    q=sub.by_id(i);a,b,c,d=get_rect(q);set_rect(q,a+HDX,b+HDX,c,d)
+q=sub.by_id(2040);a,b,c,d=get_rect(q);set_rect(q,a,690,c,d)      # -1012..368 -> -1012..690
+q=sub.by_id(1081);a,b,c,d=get_rect(q);set_rect(q,818,b,c,d)      # 496..1776 -> 818..1776
+lad=sub.by_id(972);a,b,c,d=get_rect(lad);set_rect(lad,712,723,c,d)
+q=sub.by_id(1512);a,b,c,d=get_rect(q);set_rect(q,685,749,c,d)    # ladder backdrop
 # Room lighting at Orca's level: Orca's ceiling lamps use range 300..600 (avg ~420),
 # alpha 80..130 and cast shadows. Hyperion's tubes were range 700, alpha 255, no shadows.
 n_light=0
@@ -153,6 +161,11 @@ def connect(a,pa,b,pb,color='bluewire'):
     rawconnect(n,p,buf,'signal_in1' if color!='redwire' else 'power_in',color)
     out='signal_out1' if color!='redwire' else 'power_out';candidates.append((buf,out))
     return rawconnect(buf,out,b,pb,color)
+# 7.3: AND/OR keep a non-zero input alive for TimeFrame. With 0.1 s per gate, a chain
+# of 3-4 gates kept a stale "ready"/"on branch" for up to 0.4 s after the turret had
+# already moved, which could request a step back (stutter at the hangar junction).
+# All inputs are continuous (every frame, 1/60 s), so 0.03 s is enough.
+BOOL_TF='0.03'
 class Circuit:
     def __init__(self,near):self.near=near
     def g(self,t,**kw):return gate(t,self.near,**kw)
@@ -171,11 +184,11 @@ class Circuit:
         return(e,'signal_out')
     def AND(self,*s):
         q=s[0]
-        for v in s[1:]:q=self.binary('andcomponent',q,v,Output='1',FalseOutput='0',TimeFrame='0.1')
+        for v in s[1:]:q=self.binary('andcomponent',q,v,Output='1',FalseOutput='0',TimeFrame=BOOL_TF)
         return q
     def OR(self,*s):
         q=s[0]
-        for v in s[1:]:q=self.binary('orcomponent',q,v,Output='1',FalseOutput='0',TimeFrame='0.1')
+        for v in s[1:]:q=self.binary('orcomponent',q,v,Output='1',FalseOutput='0',TimeFrame=BOOL_TF)
         return q
     def NOT(self,s):return self.unary('notcomponent',s,ContinuousOutput='False')
     def delay(self,s,t):return self.unary('delaycomponent',s,Delay=str(t),ResetWhenSignalReceived='False',ResetWhenDifferentSignalReceived='True')
@@ -202,7 +215,7 @@ manifest['command_id']=command.get('ID')
 
 # Parent loading stations: real, visible and interactable, with no moving loader copies.
 loaders={}
-for name,locs in [('upper',[(-360,565),(-245,565)]),('lower',[(325,-810),(790,-810)])]:
+for name,locs in [('upper',[(-360,565),(-245,565)]),('lower',[(325,-810),(812,-810)])]:
     a=clone(kt['coilgunloader'],*locs[0],NonInteractable='False',HiddenInGame='False',SpriteColor='255,255,255,255',InvulnerableToDamage='False',AllowSwapping='False',Tags=f'coilgunloader,{name}_rail_loader')
     b=clone(kt['railgunloadersinglevertical'],*locs[1],NonInteractable='False',HiddenInGame='False',SpriteColor='255,255,255,255',InvulnerableToDamage='False',AllowSwapping='False',Tags=f'railgunloader,{name}_rail_loader')
     loaders[name]=[a.get('ID'),b.get('ID')]
@@ -216,7 +229,23 @@ all_ports=[];home_ports=[];home_states=[]
 # Right end: right of the old tail fin A (x 3554) and tail fin E P1 (x 3612).
 # The upper slope starts right of the A deck tail fin F3 (x -1355) instead of on the A deck corner.
 RAIL_XL,RAIL_XR=-4020,3660
-UP_TOP,UP_FLAT,LO_Y=1156,900,-1120
+# 7.3 heights follow the carriage art (Kain's shuttle art) and the visual rail beam:
+# - upper: upright art scaled UP_S under the turret (art top UP_ART_TOP below the pivot);
+#   beam under the art resting above the hull: B deck above the top docking hatches
+#   (top 776), A deck above docking hatch 49 (top 1032); stowed art just above the hangar floor 457.
+# - lower: Kain's layout, beam over the art's top connectors just under the hull bottom
+#   (-1000..-1008); stowed art just above the hangar floor -904.
+_sl=ET.parse(BASE/'inspect/xml/Turret Shuttle hatch system SL.xml').getroot()
+_ka,_kb,_kc,_kd=get_rect(next(e for e in _sl if e.get('identifier')=='doublecoilgun'))
+ART_REL_TOP=max(get_rect(e)[3] for e in _sl if e.tag=='Structure')-(_kc+_kd)/2
+ART_REL_BOT=min(get_rect(e)[2] for e in _sl if e.tag=='Structure')-(_kc+_kd)/2
+UP_S,UP_ART_TOP,BEAM_T=0.7,-30,24
+UP_ART_BOT=UP_ART_TOP-(ART_REL_TOP-ART_REL_BOT)*UP_S
+UP_FLAT=math.ceil(780+BEAM_T-UP_ART_BOT);UP_TOP=math.ceil(1036+BEAM_T-UP_ART_BOT)
+UP_HOME=(-652,math.ceil(459-UP_ART_BOT))
+LO_Y=math.floor(-1006-BEAM_T-ART_REL_TOP);LO_HOME=(548,math.ceil(-902-ART_REL_BOT))
+# Rail ends shortened at the user's request (7.2 positions): upper right -8, lower right -6.
+TRIM_RIGHT={True:8,False:6}
 SLOPE_X0,SLOPE_X1=-1300,-1000
 def seg(x0,y0,x1,y1,step=76):
     n=max(1,math.ceil(math.hypot(x1-x0,y1-y0)/step))
@@ -224,9 +253,10 @@ def seg(x0,y0,x1,y1,step=76):
 def rail_points(upper):
     if upper:
         pts=[(RAIL_XL,UP_TOP)]+seg(RAIL_XL,UP_TOP,SLOPE_X0,UP_TOP)+seg(SLOPE_X0,UP_TOP,SLOPE_X1,UP_FLAT)+seg(SLOPE_X1,UP_FLAT,RAIL_XR,UP_FLAT)
-        home=(-652,580)
+        home=UP_HOME
     else:
-        pts=[(RAIL_XL,LO_Y)]+seg(RAIL_XL,LO_Y,RAIL_XR,LO_Y);home=(548,-800)
+        pts=[(RAIL_XL,LO_Y)]+seg(RAIL_XL,LO_Y,RAIL_XR,LO_Y);home=LO_HOME
+    pts=pts[:-TRIM_RIGHT[upper]]
     # The hangar branch leaves from an exact rail point.
     if home[0] not in [p[0] for p in pts]:
         y=next(p[1] for p in pts if p[0]>home[0]);pts=sorted(pts+[(home[0],y)])
@@ -262,6 +292,8 @@ for railno,name in enumerate(['upper','lower']):
     transit_ok=C.OR(C.NOT(transit),C.AND(transit,open_delayed))
     ready=C.AND(ready,transit_ok)
     operable=C.AND(deploy,onrail,closed)
+    # Turret light (double coilgun set_light, as in Kain's shuttle): on while deployed on the rail.
+    C.wire(operable,C.wifi(channel+6),'signal_in')
     control=C.g('relaycomponent',IsOn='False');C.wire(operable,control,'set_state')
     kill=C.g('relaycomponent',IsOn='False');C.wire(deploy,kill,'set_state')
     periscope=sub.by_id(867 if upper else 861)
@@ -327,19 +359,28 @@ def build_child(rail,idx):
             a,b,c,d=get_rect(q);set_rect(q,x-(b-a)//2,x+(b-a)//2,y-(d-c)//2,y+(d-c)//2)
         return q
     upper=idx==0
-    # Local frame: turret centre = carriage port = (0,0). Kain's art keeps its
-    # placement around the turret; the upper (deck-mounted) turret is mirrored.
+    # Local frame: turret centre = carriage port = (0,0).
+    # Lower: Kain's original layout (turret hanging under the carriage art).
+    # Upper (7.3): the SAME art, upright (no flipped sprites), scaled UP_S to fit the
+    # 2.56 m hangar, placed under the turret so the deck-mounted turret sits on its
+    # top: art top UP_ART_TOP below the pivot.
     ka,kb,kc,kd=get_rect(next(e for e in old if e.get('identifier')=='doublecoilgun'));TX,TY=(ka+kb)/2,(kc+kd)/2
+    ART_TOP=max(get_rect(e)[3] for e in old if e.tag=='Structure')-TY
+    def place(q,keep_size=False):
+        a,b,c,d=get_rect(q);a,b,c,d=a-TX,b-TX,c-TY,d-TY
+        if upper:
+            if keep_size:
+                cx,cy=(a+b)/2*UP_S,(c+d-2*ART_TOP)/2*UP_S+UP_ART_TOP;w,h=b-a,d-c
+                a,b,c,d=cx-w/2,cx+w/2,cy-h/2,cy+h/2
+            else:
+                a,b,c,d=a*UP_S,b*UP_S,(c-ART_TOP)*UP_S+UP_ART_TOP,(d-ART_TOP)*UP_S+UP_ART_TOP
+                q.set('Scale',f"{float(q.get('Scale','1'))*UP_S:.4f}")
+        set_rect(q,round(a),round(b),round(c),round(d))
     for e in old:
         if e.tag=='Structure':
-            q=ce(e,Indestructible='True',NoAITarget='True',DisableCollision='True')
-            a,b,c,d=get_rect(q);a,b,c,d=a-TX,b-TX,c-TY,d-TY
-            if upper:
-                c,d=-d,-c
-                flag='flippedx' if round(float(q.get('Rotation','0') or 0))%180==90 else 'flippedy'
-                if q.get(flag)=='true':q.attrib.pop(flag)
-                else:q.set(flag,'true')
-            set_rect(q,a,b,c,d)
+            place(ce(e,Indestructible='True',NoAITarget='True',DisableCollision='True'))
+    # Kain's always-on shuttle LED (lightleds01) belongs to the carriage look.
+    place(ce(next(e for e in old if e.get('identifier')=='lightleds01'),InvulnerableToDamage='True',AllowSwapping='False',NonInteractable='True'),keep_size=True)
     # The only collision fixture of a submarine body is its hull. Keep it far
     # outboard (above the upper turret, below the lower one) so it never
     # overlaps Hyperion's hulls, walls or doors at any rail or hangar position.
@@ -361,12 +402,14 @@ def build_child(rail,idx):
         g.set('Rotation','0' if upper else '180');turret.set('BaseRotation','0' if upper else '180')
         # Both turrets receive the same target angle; 0..360 is a full circle.
         turret.set('RotationLimits','0,360');turret.set('AutoOperate','False')
+        # Upper: turret drawn in front of the carriage art it sits on.
+        if upper:g.set('SpriteDepth','0.79')
     battery=ce(next(e for e in old if e.get('identifier')=='shuttlebattery'),-24,0,InvulnerableToDamage='True',HiddenInGame='True',NonInteractable='True')
     bc=battery.find('PowerContainer');bc.set('Capacity','5000');bc.set('Charge','5000');bc.set('MaxOutPut','2000');bc.set('MaxRechargeSpeed','1000');bc.set('RechargeSpeed','1000')
     sc=ce(next(e for e in old if e.get('identifier')=='supercapacitor'),24,0,InvulnerableToDamage='True',HiddenInGame='True',NonInteractable='True')
     sc.find('PowerContainer').set('RechargeSpeed','1000')
-    # Child wiring and radio units fit inside a hidden, collision-free electronics backplate.
-    back=cs.structure('ff_x_wall',-160,24,320,48,depth=.1);back.set('DisableCollision','True');back.set('Indestructible','True');back.set('HiddenInGame','True')
+    # Sub-submarines are exempt from the "gates inside large inner walls" rule (user, 7.3):
+    # the hidden backplate that only held the radios is gone.
     items={e.get('ID'):e for e in cr if e.tag=='Item'}
     def cwire(a,pa,b,pb,color='bluewire'):
         w=clean(wr.wire_tmpl);w.set('ID',cs.new_id());w.set('identifier',color);w.set('HiddenInGame','True');w.set('SpriteDepth','0.001');w.set('InvulnerableToDamage','True');w.set('NonInteractable','True');w.set('AllowSwapping','False')
@@ -377,7 +420,8 @@ def build_child(rail,idx):
     def radio(ch,x):
         q=ce(wr.tmpl['wificomponent'],x,0,HiddenInGame='True',SpriteDepth='0.001',InvulnerableToDamage='True',AllowSwapping='False')
         q.find('Holdable').set('Attached','True');q.find('WifiComponent').set('Channel',str(ch));q.find('WifiComponent').set('Range','20000');return q
-    ch=rail['channel'];aim=radio(ch+3,-120);cofire=radio(ch+4,-80);rfire=radio(ch+5,80);lock=radio(ch+2,120)
+    ch=rail['channel'];aim=radio(ch+3,-120);cofire=radio(ch+4,-80);rfire=radio(ch+5,80);lock=radio(ch+2,120);light=radio(ch+6,40)
+    cwire(light,'signal_out',gun,'set_light')
     # The periscope focuses (camera + ammo HUD) on the last turret its aim signal
     # reaches. Wire the double coilgun last so it is the default view.
     for g in [railgun,gun]:cwire(aim,'signal_out',g,'position_in');cwire(sc,'power_out',g,'power_in','redwire')
@@ -452,6 +496,51 @@ for hatches,outward,label in [(upper_hatches,1,'상부'),(lower_hatches,-1,'하�
     gh=sub.hull(x0,x1,y0,y1,f'{label} 이동포탑 해치 차수막',False);gh.set('AvoidStaying','True')
     glitch_hulls.append(gh.get('ID'))
 manifest['glitch_hulls']=glitch_hulls
+# Visual monorail (7.3): background-only beams with no collision, no damage and no
+# interaction, drawn in front of everything (tail fins included) except the hangar
+# hatches. Upper: under the carriage's bottom face; lower: over its top face.
+# Hangar branch: two vertical guide rails beside the carriage, passing the hatch
+# opening (the hatch leaves are drawn in front of them).
+RAIL_DEPTH,HATCH_DEPTH=0.0015,0.001
+visual_rails=[]
+def _deco(el,depth=RAIL_DEPTH):
+    el.set('DisableCollision','True');el.set('Indestructible','True');el.set('NoAITarget','True')
+    el.set('SpriteDepth',str(depth));visual_rails.append(el.get('ID'));return el
+def hbeam(x0,x1,yc,rot=None):
+    return _deco(sub.structure('opdeco_supportbeam_horizontal',round(x0),round(yc+BEAM_T/2),w=round(x1-x0),scale=0.5,rotation=rot))
+def vbeam(xc,y0,y1):
+    return _deco(sub.structure('opdeco_supportbeam_vertical',round(xc-8),round(y1),h=round(y1-y0),scale=0.4))
+for rail,child in zip(manifest['rails'],children):
+    upper=rail['name']=='upper'
+    art=[get_rect(e) for e in child if e.tag=='Structure']
+    face=min(r[2] for r in art) if upper else max(r[3] for r in art)   # bottom / top face (local)
+    xl,xr=min(r[0] for r in art),max(r[1] for r in art)
+    off=face-BEAM_T/2 if upper else face+BEAM_T/2                       # beam centre line
+    pts=rail['points'];N,H,HOME=rail['rail_end'],rail['junction'],rail['home']
+    ext=[(x,y+off) for x,y in pts[:N+1]]
+    runs=[];i=0
+    while i<N:
+        j=i+1
+        sl=(ext[j][1]-ext[i][1])/(ext[j][0]-ext[i][0])
+        while j<N and abs((ext[j+1][1]-ext[j][1])/(ext[j+1][0]-ext[j][0])-sl)<1e-3:j+=1
+        runs.append((i,j));i=j
+    for k,(i,j) in enumerate(runs):
+        (ax,ay),(bx,by)=ext[i],ext[j]
+        e0=-xl+20 if k==0 else 12; e1=xr+20 if k==len(runs)-1 else 12
+        if abs(by-ay)<0.5:
+            hbeam(ax-e0,bx+e1,ay)
+        else:
+            L=math.hypot(bx-ax,by-ay);ux,uy=(bx-ax)/L,(by-ay)/L
+            sx,sy=ax-ux*e0,ay-uy*e0;ex_,ey_=bx+ux*e1,by+uy*e1
+            cx,cy=(sx+ex_)/2,(sy+ey_)/2;LL=L+e0+e1
+            # Structure rotation is clockwise on screen: a run going down to the right is positive.
+            hbeam(cx-LL/2,cx+LL/2,cy,rot=f'{math.degrees(math.atan2(-(by-ay),bx-ax)):.2f}')
+    hx,hy=pts[HOME];jy=pts[H][1]
+    if upper:y0,y1=hy+face,jy+face-BEAM_T
+    else:y0,y1=jy+face+BEAM_T,hy+face
+    for gx in (hx+xl-10,hx+xr+10):vbeam(gx,y0,y1)
+    for h in rail['hatches']:sub.by_id(h).set('SpriteDepth',str(HATCH_DEPTH))
+manifest['visual_rails']=visual_rails
 # Update neutral ballast to account for the two tiny linked hulls.
 V=sum((b-a)*(d-c) for e in root if e.tag=='Hull' for a,b,c,d in [get_rect(e)])+512
 B=sum((b-a)*(d-c) for e in root if e.tag=='Hull' and 'ballast' in e.get('RoomName','').lower() for a,b,c,d in [get_rect(e)])
@@ -501,15 +590,16 @@ for r,rail in zip(children,manifest['rails']):
     for key in ['ports','hatches','loaders']:rail[key]=[idmap[i] for i in rail[key]]
     for key in ['actual','target','periscope','control']:rail[key]=idmap[rail[key]]
 manifest['command_id']=idmap[manifest['command_id']]
+for key in ['visual_rails','glitch_hulls']:manifest[key]=[idmap[i] for i in manifest[key]]
 manifest['parent_id_map']=idmap
 manifest['lighting']={'editor_before':572,'editor_after':sum(len(e.findall('LightComponent')) for e in root),'removed_main':384,'removed_including_children':removed_lights,'room_lights_preserved':True}
 log(f'Rail lamps removed: {removed_lights} including children; editor light components: {manifest["lighting"]["editor_after"]}')
-root.set('name','히페리온 - 베이스 7.2');root.set('description','이동포탑 2기: C층 좌측 잠망경=하부, 우측=상부. A/D 이동, 마우스 이중 코일건(기본 화면), W 레일건. 함장실 메인단말기 첫 버튼으로 전개/수납. 장전은 본함 격납고에서 합니다. 7.2: 레일 이탈 수정, 레일 연장, 해치 차수막, 조명 조정.')
-for old_name in ['히페리온 - 베이스 7.sub','히페리온 - 베이스 7.1.sub']:(OUT/old_name).unlink(missing_ok=True)
-save_sub(root,OUT/'히페리온 - 베이스 7.2.sub')
-filelist=ET.Element('contentpackage',name='Hyperion Rail Turrets',corepackage='false',gameversion=root.get('gameversion','1.13.4.0'),modversion='0.1.2')
+root.set('name','히페리온 - 베이스 7.3');root.set('description','이동포탑 2기: C층 좌측 잠망경=하부, 우측=상부. A/D 이동, 마우스 이중 코일건(기본 화면), W 레일건. 함장실 메인단말기 첫 버튼으로 전개/수납. 장전은 본함 격납고에서 합니다. 7.3: 시각 레일, 상부 포탑 디자인, 포탑 조명, 레일 길이, 하부 격납고 사다리.')
+for old_name in ['히페리온 - 베이스 7.sub','히페리온 - 베이스 7.1.sub','히페리온 - 베이스 7.2.sub']:(OUT/old_name).unlink(missing_ok=True)
+save_sub(root,OUT/'히페리온 - 베이스 7.3.sub')
+filelist=ET.Element('contentpackage',name='Hyperion Rail Turrets',corepackage='false',gameversion=root.get('gameversion','1.13.4.0'),modversion='0.1.3')
 ET.SubElement(filelist,'Item',file='%ModDir%/RailPorts.xml')
-for name in ['히페리온 - 베이스 7.2.sub']+[r['child'] for r in manifest['rails']]:ET.SubElement(filelist,'Submarine',file='%ModDir%/'+name)
+for name in ['히페리온 - 베이스 7.3.sub']+[r['child'] for r in manifest['rails']]:ET.SubElement(filelist,'Submarine',file='%ModDir%/'+name)
 ET.indent(filelist);ET.ElementTree(filelist).write(OUT/'filelist.xml',encoding='utf-8',xml_declaration=True)
 manifest.update(power_connections=len(loads),neutral_ballast=.07*V/B,parent_max_id=len(idmap))
 (BASE/'deliverables/manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2))

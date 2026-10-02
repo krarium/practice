@@ -1,5 +1,5 @@
-upper: rail 106 ports, hangar branch 14 ports, control constructed
-lower: rail 104 ports, hangar branch 14 ports, control constructed
+upper: rail 98 ports, hangar branch 15 ports, control constructed
+lower: rail 98 ports, hangar branch 18 ports, control constructed
 Connected 65 previously unpowered devices / rail buses
 웨이포인트 695개 생성 (외부 순환 146개 포함)
-Rail lamps removed: 480 including children; editor light components: 188
+Rail lamps removed: 462 including children; editor light components: 188

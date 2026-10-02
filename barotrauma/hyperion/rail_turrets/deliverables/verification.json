@@ -1,16 +1,16 @@
 {
-  "static_assertions": 19923,
+  "static_assertions": 19506,
   "scenarios": [
     {
       "lock_model_seconds": 0.35,
-      "time_model_seconds": 170.2,
-      "transit_steps": 122,
+      "time_model_seconds": 203.18,
+      "transit_steps": 142,
       "all_passed": true
     },
     {
       "lock_model_seconds": 1.0,
-      "time_model_seconds": 388.37,
-      "transit_steps": 116,
+      "time_model_seconds": 383.4,
+      "transit_steps": 136,
       "all_passed": true
     }
   ],
